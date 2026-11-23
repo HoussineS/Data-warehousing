@@ -23,8 +23,6 @@ copy the service_account for the first row
 */
 
 
-
-
 CREATE OR ALTER PROCEDURE branze.load_branze
 AS
 BEGIN
@@ -176,5 +174,5 @@ BEGIN
     END CATCH
 
 END;
-GO
+GO ;
 
