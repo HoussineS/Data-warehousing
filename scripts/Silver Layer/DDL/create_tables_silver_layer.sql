@@ -29,10 +29,11 @@ IF OBJECT_ID('silver.crm_prd_info', 'U') IS NOT NULL
 GO
 CREATE TABLE silver.crm_prd_info(
 	prd_id int,
+	cat_id varchar(50),
 	prd_key varchar(50),
 	prd_nm varchar(50),
 	prd_cost float,
-	prd_line varchar(5),
+	prd_line varchar(20),
 	prd_start_dt date,
 	prd_end_dt date,
 	dw_create_date datetime default getdate(),

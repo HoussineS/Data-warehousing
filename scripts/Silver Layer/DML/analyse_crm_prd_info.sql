@@ -23,6 +23,37 @@ select distinct cat.id from
   where T.CAT_id is null;
   ;
 
+  select * from branze.crm_prd_info;
+
+  select  * from(
+     SELECT  
+          [prd_id],
+          replace(substring(prd_key,1,5),'-','_') as cat_id,
+          substring(prd_key,7 ,len(prd_key)) as prd_key
+          ,[prd_nm]
+          ,isnull(prd_cost,0) as prd_cost,
+          case upper(trim(prd_line))
+                when 'R' then 'Road'
+                when 'M' then 'Mountain'
+                when 'S' then 'Other sales'
+                else 'n/a' 
+           end as prd_line
+           ,[prd_start_dt]
+          ,DATEADD(
+        DAY,
+        -1,
+        LEAD(prd_start_dt, 1, NULL) OVER (
+            PARTITION BY prd_key
+            ORDER BY prd_start_dt
+        )
+    ) AS prd_end_dt
+      
+    FROM [DataWarehouse].[branze].[crm_prd_info]
+ ) as t
+
+where  t.prd_key = 'HL-U509';
+
+
 
 
   SELECT  [prd_id]
@@ -49,6 +80,7 @@ select distinct cat.id from
 -- S 
 -- T 
   select distinct prd_line from branze.crm_prd_info;
+
 
 
 
